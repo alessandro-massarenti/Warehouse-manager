@@ -3,7 +3,7 @@
 // Author      : Alessandro
 // Version     :
 // Copyright   : Mit copy
-// Description : Hello World in C++, Ansi-style
+// Description : Ansi-style
 //============================================================================
 bool debug = false;
 
