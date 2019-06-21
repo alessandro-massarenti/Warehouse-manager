@@ -55,6 +55,8 @@ int main() {
 	int input;
 	bool going = true;
 	string id;
+	
+	/*
 	pid_t pid = fork();
 	if (pid < 0)
 		perror("fork failed");
@@ -66,7 +68,8 @@ int main() {
 		exit(0);
 	}
 	if (debug)cout << pid;
-
+	*/
+	
 	while (going) {
 		menu();
 		cin >> input;
