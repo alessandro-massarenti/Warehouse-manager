@@ -12,32 +12,13 @@ bool debug = false;
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/types.h>
-#include "data.h"
+#include <pthread.h>
+#include "boxData.h"
+#include "various.h"
+#include "threads.h"
 using namespace std;
 
-void leggi(scatola*& list) {
-	string input;
-	cin >> input;
-	if (input != "-1") {
-		if (debug)cout << input << endl;
-		aggiungiScatola(input, list);
-		if (debug)cout << "prossimo" << endl;
-		leggi(list);
 
-	} else {
-		cout << endl;
-		return;
-	}
-}
-
-void stampa(scatola*&list) {
-	if (!list)
-		cout << endl;
-	else {
-		cout << list->code << " " << list->value << endl;
-		stampa(list->next);
-	}
-}
 
 void menu() {
 	cout << "Menù principale:" << endl;
@@ -52,24 +33,17 @@ void menu() {
 int main() {
 
 	scatola* list = 0;
+
 	int input;
 	bool going = true;
 	string id;
-	
-	/*
-	pid_t pid = fork();
-	if (pid < 0)
-		perror("fork failed");
-	if (pid == 0) {
-		while (true) {
-			cout << "cacca"<< endl;
-			sleep(4);
-		}
-		exit(0);
-	}
-	if (debug)cout << pid;
-	*/
-	
+
+	pthread_t threadbello[2];
+	myswap *s = new myswap(list);
+
+	pthread_create(&threadbello[0], NULL, low_stock_check, s);
+	//pthread_create(&threadbello[1], NULL, cose, s);
+
 	while (going) {
 		menu();
 		cin >> input;
@@ -98,4 +72,6 @@ int main() {
 		}
 	}
 	return 0;
+	pthread_join(threadbello[0], NULL);
+	pthread_join(threadbello[1], NULL);
 }
