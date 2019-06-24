@@ -54,3 +54,26 @@ void cancellaScatola(scatola*& list, std::string id) {
 		std::cout << "Non c'è nessuna scatola in lista" << std::endl;
 }
 
+
+void leggi(scatola*& list) {
+	std::string input;
+	std::cin >> input;
+	if (input != "-1") {
+		aggiungiScatola(input, list);
+		leggi(list);
+
+	} else {
+		std::cout << std::endl;
+		return;
+	}
+}
+
+void stampa(scatola*list) {
+	if (!list)
+		std::cout << std::endl;
+	else {
+		std::cout << list->code << " " << list->value << std::endl;
+		stampa(list->next);
+	}
+}
+

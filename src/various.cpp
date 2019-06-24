@@ -1,5 +1,5 @@
 /*
- * misc.cpp
+ * various.cpp
  *
  *  Created on: Jun 21, 2019
  *      Author: amassare
@@ -7,32 +7,26 @@
 
 #include "various.h"
 
-
-void leggi(scatola*& list) {
-	std::string input;
-	std::cin >> input;
-	if (input != "-1") {
-		aggiungiScatola(input, list);
-		leggi(list);
-
-	} else {
-		std::cout << std::endl;
-		return;
-	}
-}
-
-void stampa(scatola*list) {
-	if (!list)
-		std::cout << std::endl;
-	else {
-		std::cout << list->code << " " << list->value << std::endl;
-		stampa(list->next);
-	}
-}
-
-void attentionListAdd(scatola*list, attention*& attention_list, int type){
-	if(!list)
-		attention_list = new attention(list,type);
+void warningListAdd(scatola*box_list, warning*& warning_list, int type){
+	if(!box_list)
+		warning_list = new warning(*box_list,type);
 	else
-		attentionListAdd(list,attention_list->next,type);
+		warningListAdd(box_list,warning_list->next,type);
 }
+
+//Low stock warehouseCheckup
+//Deve scorrere tutta la box_list e se trova scatole con un valore troppo basso di oggetti al suo interno;
+//deve aggiungere un elemento warning(puntatore a scatola) che dica warning resources too low
+
+void lowStockCheckup(scatola* box_list, warning*& warning_list){
+
+	if(!box_list)
+		return;
+	if(box_list->value <= box_list->low_warn){
+		warningListAdd(box_list,warning_list,1);
+	}
+	lowStockCheckup(box_list->next, warning_list);
+}
+
+
+// warn should be unloaded on a database periodically

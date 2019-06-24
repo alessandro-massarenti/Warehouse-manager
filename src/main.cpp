@@ -32,16 +32,17 @@ void menu() {
 
 int main() {
 
-	scatola* list = 0;
+	scatola* box_list = 0;
+	warning* warn_list = 0;
 
 	int input;
 	bool going = true;
 	string id;
 
 	pthread_t threadbello[2];
-	myswap *s = new myswap(list);
+	myswap *s = new myswap(box_list,warn_list);
 
-	pthread_create(&threadbello[0], NULL, check, s);
+	pthread_create(&threadbello[0], NULL, warehouseCheckup, s);
 	//pthread_create(&threadbello[1], NULL, cose, s);
 
 	while (going) {
@@ -50,17 +51,17 @@ int main() {
 		switch (input) {
 		case (1):
 			cout << "input pacchi" << endl;
-			leggi(list);
+			leggi(box_list);
 			break;
 		case (2):
 			cout << "lista pacchi" << endl;
 			cout << "Codice pacco - numero pacchi" << endl;
-			stampa(list);
+			stampa(box_list);
 			break;
 		case (3):
 			cout << "uscita pacchi" << endl;
 			cin >> id;
-			cancellaScatola(list, id);
+			cancellaScatola(box_list, id);
 			break;
 		case (-1):
 			cout << "Bye";

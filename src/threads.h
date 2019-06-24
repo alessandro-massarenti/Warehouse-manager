@@ -10,6 +10,6 @@
 
 #include "various.h"
 
-void* check(void*);
+void* warehouseCheckup(void*);
 
 #endif /* THREADS_H_ */
