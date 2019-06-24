@@ -6,13 +6,19 @@
  */
 
 #include "threads.h"
+#include "various.h"
+
+#include <iostream>
+#include <unistd.h>
 
 
 
-void* low_stock_check(void* data) {
+void* check(void* data) {
 
 	while (true) {
 
+
+		stampa(((myswap*)data)->ptr);
 
 		sleep(3);
 	}

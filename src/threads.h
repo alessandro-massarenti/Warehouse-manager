@@ -8,9 +8,8 @@
 #ifndef THREADS_H_
 #define THREADS_H_
 
-#include <stdlib.h>
 #include "various.h"
 
-void* low_stock_check(void*);
+void* check(void*);
 
 #endif /* THREADS_H_ */

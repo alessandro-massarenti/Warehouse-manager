@@ -12,10 +12,10 @@
 
 class myswap {
 public:
-	scatola*& ptr;
+	scatola*& collo;
 
 	myswap(scatola*& p) :
-			ptr(p) {
+			collo(p) {
 	}
 };
 

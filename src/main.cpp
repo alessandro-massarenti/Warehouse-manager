@@ -41,7 +41,7 @@ int main() {
 	pthread_t threadbello[2];
 	myswap *s = new myswap(list);
 
-	pthread_create(&threadbello[0], NULL, low_stock_check, s);
+	pthread_create(&threadbello[0], NULL, check, s);
 	//pthread_create(&threadbello[1], NULL, cose, s);
 
 	while (going) {
@@ -73,5 +73,5 @@ int main() {
 	}
 	return 0;
 	pthread_join(threadbello[0], NULL);
-	//pthread_join(threadbello[1], NULL);
+	pthread_join(threadbello[1], NULL);
 }
