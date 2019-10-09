@@ -7,36 +7,29 @@
 
 <?php
 
-    include_once "assets/engine/includes/class-autoloader.inc.php";
-    if(!is_writable("inc/db_connect.php"))
-        {
-            $error_msg="<p>Sorry, I can't write to <b>inc/db_connect.php</b>.
-            You will have to edit the file yourself. Here is what you need to insert in that file:<br /><br />
-            <textarea rows='5' cols='50' onclick='this.select();'>$connect_code</textarea></p>";
-            }
-        else
-        {
-        $fp = fopen('inc/db_connect.php', 'wb');
-        fwrite($fp,$connect_code);
-        fclose($fp);
-        chmod('inc/db_connect.php', 0666);
-    }
+include_once "assets/engine/includes/class-autoloader.inc.php";
 
-    Db::setup();
-?>
+// Sanity check.
+if (false) {
+    ?>
+    <!DOCTYPE html>
+    <html>
 
-<?php
-    $protected = false;
-    require_once "assets/bodywork/bodyparts/head.html";
-?>
-
-<!DOCTYPE html>
-<html>
     <head>
-        <?php require_once "assets/bodywork/bodyparts/head.html"; ?>
-
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Error: PHP is not running</title>
     </head>
-    <body>
 
+    <body>
+        <h1>Error: PHP is not running</h1>
+        <p>Warehouse-manager requires that your web server is running PHP. Your server does not have PHP installed, or PHP is turned off.</p>
     </body>
-</html>
+
+    </html>
+<?php
+}
+?>
+
+
+
+isset( $_POST['weblog_title'] ) ? trim( wp_unslash( $_POST['weblog_title'] ) ) : '';
